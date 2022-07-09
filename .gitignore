@@ -1,0 +1,14 @@
+*.pyc
+__pycache__/
+Project_Default.xml
+.idea/vcs.xml
+.idea/workspace.xml
+.idea/
+.data
+.venv
+*.log
+strat.sh
+celerybeat-schedule.db
+celerybeat.pid
+dump.rdb
+
