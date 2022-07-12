@@ -1,105 +1,67 @@
-<!DOCTYPE html>
-<html>
+{% extends 'mosques/base.html' %}
 
-<body>
-
-
-
-<p>Displaying location using Latitude and Longitude</p>
-
-<form method="POST" class="post-form">{% csrf_token %}
-        <p>
-        <label for="id_name">Name:</label>
-        <input type="text" name="name" value="test4" maxlength="100" required="" id="id_name">
-        
-        
-      </p>
+{% block content %}
+<div class="container-fluid">
+<form method="post">
+  {% csrf_token %}
+  <form method="post">
     
+      <label for="id_name">Name:</label>
+      <div class="mb-3">
+      <input  class="form-control-sm" type="text" name="name" maxlength="100" required="" id="id_name">
       
-      <p>
-        <label for="id_location">Location:</label>
-        <style type="text/css">
-        #id_location_map { width: 600px; height: 400px; }
-        #id_location_map .aligned label { float: inherit; }
-        #id_location_div_map { position: relative; vertical-align: top; float: left; }
-       
-        
-    </style>
-    
-    </p><div id="id_location_div_map">
-        <div id="id_location_map"></div>
-        <span class="clear_features"><a href="javascript:geodjango_location.clearFeatures()">Delete all Features</a></span>
-        
-        <textarea id="id_location" class="vSerializedField required" cols="150" rows="10" name="location"></textarea>
-        <script>
-            var map_options = {};
-            
-                var base_layer = new ol.layer.Tile({
-                    source: new ol.source.XYZ({
-                        attributions: "NASA Worldview",
-                        maxZoom: 8,
-                        url: "https://map1{a-c}.vis.earthdata.nasa.gov/wmts-webmerc/" +
-                             "BlueMarble_ShadedRelief_Bathymetry/default/%7BTime%7D/" +
-                             "GoogleMapsCompatible_Level8/{z}/{y}/{x}.jpg"
-                    })
-                });
-            
-            var options = {
-                base_layer: base_layer,
-                geom_name: 'Point',
-                id: 'id_location',
-                map_id: 'id_location_map',
-                map_options: map_options,
-                map_srid: 3857,
-                name: 'location'
-            };
-            
-            var geodjango_location = new MapWidget(options);
-        </script>
+      
     </div>
-        
-        
-      <p></p>
-    
+  
+    <label for="id_address">Address:</label>
+    <div class="mb-3">
       
-      <p>
-        <label for="id_address">Address:</label>
-        <input type="text" name="address" value="Chittagong" maxlength="100" required="" id="id_address">
-        
-        
-      </p>
-    
+      <input  class="form-control-sm" type="text" name="address" maxlength="100" required="" id="id_address">
       
-      <p>
-        <label for="id_city">City:</label>
-        <input type="text" name="city" value="Chittagong" maxlength="50" required="" id="id_city">
+      
+    </div>
+  
+    
+    
+      <label for="id_city">City:</label>
+      <div class="mb-3">
+      <input  class="form-control-sm" type="text" name="city" maxlength="50" required="" id="id_city">
+      
+      
+    </div>
+    <p>Click "Locate Me" button if you are inside the mosque. </p>
+    <p> Or find the mosque location in google map and put the coordination in latitude and longitude fields.</p>
+
+  <button class="btn btn-primary" onclick="getLocation()">Locate Me</button>
+    
+  
+      <label for="id_longitude">Longitude:</label>
+      <div class="mb-3">
+      <input  class="form-control-sm" type="number" name="longitude" step="any" required="" id="id_longitude">
+      
+      
+    </div>
+  
+    
+  
+      <label for="id_latitude">Latitude:</label>
+      <div class="mb-3">
+      <input  class="form-control-sm" type="number" name="latitude" step="any" required="" id="id_latitude">
+      
+      
         
-        
-          
-        
-      </p>
-        <button type="submit" class="save btn btn-secondary">Save</button>
-    </form>
+      
+    </div>
+  
+  <button type="submit" class="btn btn-success">Submit
+  </button>
+  </form>
+</div>
+  {% endblock content %}
 
+ {% block script %}
 
+    var x = document.getElementById("id_longitude");
+    var y = document.getElementById("id_latitude");
 
-
-
-
-
-<script>
-    var variable1 = document.getElementById("demo1");
-    function getlocation() {
-      navigator.geolocation.getCurrentPosition(showLoc);
-    }
-    function showLoc(pos) {
-      variable1.innerHTML =
-        "Latitude: " +
-        pos.coords.latitude +
-        "<br>Longitude: " +
-        pos.coords.longitude;
-    }
-  </script>
-</body>
-
-</html>
+  {% endblock script %}

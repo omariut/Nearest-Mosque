@@ -1,19 +1,50 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <title>Nearby Shops</title>
-    </head>
-<body>
-    <h1>Nearby Shops</h1>
+{% extends 'mosques/base.html' %}
+{% block content %}
+    <div class="container-fluid">
+    <h1>Nearby Mosques</h1>
+        <div>
+    
+    <p>Click the button to get your coordinates.</p>
+
+    <button class="btn btn-primary" onclick="getLocation()">Locate Me</button>
+ 
+    <form action="", method="GET">
+      <div class="mb-3">
+        <input class="form-control-sm" type="text" id ="longitude" name="longitude" placeholder="longitude" >
+      </div>
+        <div class="mb-3">
+        <input class="form-control-sm" type="text" id="latitude" name="latitude" placeholder="latitude" >
+      </div>
+
+        <button
+        type="submit" class="btn btn-success">Submit
+        </button>
+    </form>
+
+    <div>
     {% if mosques %}
-    <ul>
-    {% for mosque in mosques %}
-        <li>
-        {{ mosque.name }}: {{mosque.location}}
-        </li>
-    {% endfor %}
-    </ul>
+    
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Your Location</th>
+            <th>Distance</th>
+        </tr>
+    </thead>
+        {% for mosque in mosques %}
+        <tr>
+            <td>{{ mosque.name }}</td>
+            <td>{{user_location}}</td>
+            <td>{{mosque.distance}}</td>
+        </tr>
+        {% endfor %}
+    </table>
     {% endif %}
-</body>
-</html> 
+    </div>
+    {% endblock content %}
+{% block script %}
+
+    var x = document.getElementById("longitude");
+    var y = document.getElementById("latitude");
+  {% endblock script %}
